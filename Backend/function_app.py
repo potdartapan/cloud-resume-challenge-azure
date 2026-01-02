@@ -12,13 +12,20 @@ def GetVisitorCount(req: func.HttpRequest) -> func.HttpResponse:
     table_client = TableClient.from_connection_string(conn_str, table_name="VisitorCount")
 
     try:
-        # Try to fetch the entity
         try:
+            # 1. Fetch the entity
             entity = table_client.get_entity(partition_key="visitor_stats", row_key="1")
-            entity['count'] += 1
+            
+            # 2. FIX: Convert the existing value to an integer before adding
+            # This handles the "0" string created by Terraform
+            current_count = int(entity.get('count', 0))
+            entity['count'] = current_count + 1
+            
+            # 3. Update the table
             table_client.update_entity(entity)
+            
         except ResourceNotFoundError:
-            # If it doesn't exist, create it with a count of 1
+            # If Terraform didn't create the row for some reason, create it now
             entity = {
                 'PartitionKey': 'visitor_stats',
                 'RowKey': '1',
@@ -26,8 +33,8 @@ def GetVisitorCount(req: func.HttpRequest) -> func.HttpResponse:
             }
             table_client.create_entity(entity)
         
+        # 4. Return the new count
         new_count = entity['count']
-        
         return func.HttpResponse(
             body=json.dumps({"count": new_count}),
             mimetype="application/json",
@@ -35,5 +42,9 @@ def GetVisitorCount(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     except Exception as e:
-        # Fallback error handling
-        return func.HttpResponse(json.dumps({"error": str(e)}), mimetype="application/json", status_code=500)
+        # This will now return a clean JSON error if something else fails
+        return func.HttpResponse(
+            body=json.dumps({"error": str(e)}), 
+            mimetype="application/json", 
+            status_code=500
+        )
