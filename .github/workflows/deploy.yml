@@ -1,0 +1,66 @@
+name: Deploy Cloud Resume
+
+on:
+  push:
+    branches: [ main ] # Triggers whenever you push to the main branch
+
+env:
+  # UPDATE THESE to match your actual Azure resource names
+  AZURE_FUNCTIONAPP_NAME: 'tf-clouf-resume-challenge-tp'
+  AZURE_STORAGE_ACCOUNT: 'storageaccountesttf123'
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  # --- JOB 1: DEPLOY FRONTEND ---
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Upload Frontend to $web
+        uses: azure/CLI@v2
+        with:
+          inlineScript: |
+            az storage blob upload-batch \
+              --account-name ${{ env.AZURE_STORAGE_ACCOUNT }} \
+              --auth-mode key \
+              -d '$web' \
+              -s ./frontend \
+              --overwrite true
+
+  # --- JOB 2: DEPLOY BACKEND ---
+  deploy-backend:
+    runs-on: ubuntu-latest
+    needs: deploy-frontend # Ensures frontend uploads first (optional)
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install Dependencies
+        run: |
+          pushd ./backend
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt --target=".python_packages/lib/site-packages"
+          popd
+
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to Azure Functions
+        uses: Azure/functions-action@v1
+        with:
+          app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+          package: ./backend

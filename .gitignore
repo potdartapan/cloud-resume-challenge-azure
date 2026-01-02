@@ -1,0 +1,27 @@
+# Python Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Azure Functions local settings (CRITICAL: Contains secrets)
+bin/
+obj/
+local.settings.json
+.python_packages/
+__pycache__/
+
+# VS Code environment settings
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Frontend dependencies (if you use them later)
+node_modules/

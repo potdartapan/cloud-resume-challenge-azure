@@ -1,0 +1,190 @@
+/* === BASE STYLES === */
+body {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: linear-gradient(135deg, #eaf3ff 0%, #f9fbff 100%);
+  color: #1e1e1e;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* === CONTAINER === */
+.container {
+  max-width: 850px;
+  background: #ffffff;
+  margin: 40px auto;
+  padding: 50px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-top: 6px solid #0078d4;
+}
+
+/* === HEADER === */
+header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+h1 {
+  font-size: 2.4em;
+  color: #0078d4;
+  font-weight: 700;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.2em;
+  color: #555;
+  margin: 6px 0 12px;
+}
+
+header a {
+  color: #0078d4;
+  font-weight: 500;
+}
+
+header a:hover {
+  color: #005fa3;
+  text-decoration: underline;
+}
+
+/* === SECTION TITLES === */
+h3 {
+  color: #005fa3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 35px;
+  margin-bottom: 12px;
+  font-size: 1.05em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-left: 5px solid #0078d4;
+  padding-left: 10px;
+}
+
+h3 i {
+  color: #0078d4;
+  width: 20px;
+  height: 20px;
+}
+
+/* === SUBHEADINGS === */
+h4 {
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: 600;
+}
+
+.date {
+  float: right;
+  font-style: italic;
+  color: #b4b4b4;
+  font-size: 0.9em;
+}
+
+/* === LISTS === */
+ul {
+  margin-top: 5px;
+  padding-left: 25px;
+}
+
+ul.skills {
+  list-style: none;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 20px;
+}
+
+ul.skills li {
+  background: #f4f9ff;
+  border-left: 3px solid #0078d4;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+
+ul.skills li:hover {
+  background: #e8f3ff;
+}
+
+/* === CERTIFICATIONS === */
+.cert-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 30px;
+  margin-top: 10px;
+}
+
+.cert-grid p {
+  background: #f4f9ff;
+  border-left: 3px solid #00b8a9;
+  padding: 6px 10px;
+  border-radius: 6px;
+  margin: 0;
+  transition: 0.2s ease;
+}
+
+.cert-grid p:hover {
+  background: #e3f8f5;
+}
+
+/* === LINKS === */
+a {
+  color: #0078d4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* === DARK MODE === */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+    color: #e6edf3;
+  }
+
+  .container {
+    background: #1e252f;
+    border-top-color: #1f6feb;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  }
+
+  h1, h3, a, h3 i {
+    color: #58a6ff;
+  }
+
+  h2, .date {
+    color: #aaa;
+  }
+
+  ul.skills li,
+  .cert-grid p {
+    background: #2b3441;
+    border-left-color: #58a6ff;
+  }
+
+  ul.skills li:hover,
+  .cert-grid p:hover {
+    background: #303b49;
+  }
+}
+
+/* === PRINT === */
+@media print {
+  body {
+    background: #fff;
+  }
+  .container {
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+  h3 {
+    border: none;
+  }
+}
