@@ -25,3 +25,9 @@ Thumbs.db
 
 # Frontend dependencies (if you use them later)
 node_modules/
+
+# To this:
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.backup
+**/.terraform.lock.hcl
