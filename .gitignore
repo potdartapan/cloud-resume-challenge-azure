@@ -1,32 +1,28 @@
 # Python Virtual Environments
-.venv/
-venv/
-ENV/
-env/
+**/.venv/
+**/venv/
+**/env/
 
 # Python cache and compiled files
-__pycache__/
-*.py[cod]
-*$py.class
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
 
-# Azure Functions local settings (CRITICAL: Contains secrets)
-bin/
-obj/
-local.settings.json
-.python_packages/
-__pycache__/
+# Azure Functions local settings
+**/bin/
+**/obj/
+**/local.settings.json
+**/.python_packages/
 
-# VS Code environment settings
+# VS Code & OS
 .vscode/
+**/.DS_Store
+**/Thumbs.db
 
-# OS generated files
-.DS_Store
-Thumbs.db
+# Dependencies
+**/node_modules/
 
-# Frontend dependencies (if you use them later)
-node_modules/
-
-# To this:
+# Terraform (The big ones!)
 **/.terraform/
 **/*.tfstate
 **/*.tfstate.backup
