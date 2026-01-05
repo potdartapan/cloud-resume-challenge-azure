@@ -5,7 +5,7 @@ on:
 
 env:
   # UPDATE THESE to match your actual Azure resource names
-  AZURE_FUNCTIONAPP_NAME: 'tf-clouf-resume-challenge-tp'
+  AZURE_FUNCTIONAPP_NAME: 'tf-cloud-resume-challenge-tp'
   AZURE_STORAGE_ACCOUNT: 'storageaccountesttf123'
   PYTHON_VERSION: '3.11'
 
