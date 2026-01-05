@@ -2,7 +2,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     getVisitCount();
 });
 
-const functionApi = 'https://tf-clouf-resume-challenge-tp.azurewebsites.net/api/GetVisitorCount'; // Change this to your Azure URL later!
+const functionApi = 'https://tf-cloud-resume-challenge-tp.azurewebsites.net/api/GetVisitorCount'; // Change this to your Azure URL later!
 
 const getVisitCount = () => {
     let count = 30; // Default/fallback
