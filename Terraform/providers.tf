@@ -10,6 +10,11 @@ terraform {
 }
 
 provider "azurerm" {
-  features {}
+  features {
+    application_insights {
+      # Stops Azure from automatically creating that "Failure Anomalies" rule.
+      disable_generated_rule = true
+    }
+  }
   subscription_id = "c520661a-5fcd-4696-ad6f-c2c905800b80"
 }
